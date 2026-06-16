@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bailanzhenjun2 | AI Application Developer</title>
+  <meta name="description" content="AI Application Developer specializing in RAG systems and chemical engineering AI solutions">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #1A1B26;
+      --bg-surface: #24283B;
+      --bg-surface-hover: #2F3347;
+      --text-primary: #C0CAF5;
+      --text-secondary: #9AA5CE;
+      --text-muted: #565F89;
+      --accent-blue: #7AA2F7;
+      --accent-purple: #BB9AF7;
+      --accent-green: #9ECE6A;
+      --accent-orange: #FF9E64;
+      --accent-red: #F7768E;
+      --accent-cyan: #7DCFFF;
+      --border: rgba(255, 255, 255, 0.06);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--accent-blue);
+      color: var(--bg-primary);
+    }
+
+    a { color: var(--accent-blue); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-purple); }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ===== Navigation ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26, 27, 38, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+
+    nav .container {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .nav-logo {
+      font-weight: 700; font-size: 1.1rem;
+      color: var(--accent-blue);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-secondary); font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-blue); }
+
+    .nav-toggle { display: none; background: none; border: none; color: var(--text-primary); cursor: pointer; }
+
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative;
+      padding-top: 5rem;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(122, 162, 247, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(187, 154, 247, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-greeting {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-blue); font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700; line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-name .highlight { color: var(--accent-blue); }
+
+    .hero-title {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: var(--text-secondary); font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-desc {
+      color: var(--text-muted); font-size: 1.05rem;
+      max-width: 560px; margin-bottom: 2.5rem;
+    }
+
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: 10px;
+      font-weight: 600; font-size: 0.95rem;
+      transition: all 0.25s;
+    }
+
+    .btn-primary {
+      background: var(--accent-blue); color: var(--bg-primary);
+    }
+    .btn-primary:hover {
+      background: var(--accent-purple); color: var(--bg-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(122, 162, 247, 0.3);
+    }
+
+    .btn-outline {
+      border: 1.5px solid var(--accent-blue); color: var(--accent-blue);
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: rgba(122, 162, 247, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ===== Sections ===== */
+    section { padding: 6rem 0; }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-blue); font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+    }
+
+    /* ===== Glass Card ===== */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(122, 162, 247, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ===== Projects ===== */
+    .project-card { margin-bottom: 2rem; }
+
+    .project-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;
+    }
+
+    .project-name {
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .project-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 600;
+      background: rgba(158, 206, 106, 0.15);
+      color: var(--accent-green);
+    }
+
+    .project-desc {
+      color: var(--text-secondary); margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .project-highlights {
+      list-style: none; margin-bottom: 1.25rem;
+    }
+
+    .project-highlights li {
+      position: relative; padding-left: 1.5rem;
+      color: var(--text-secondary); font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-highlights li::before {
+      content: '';
+      position: absolute; left: 0; top: 0.6rem;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-blue);
+    }
+
+    .project-tech {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tech-tag {
+      padding: 0.2rem 0.7rem; border-radius: 6px;
+      font-size: 0.78rem; font-weight: 500;
+      background: rgba(122, 162, 247, 0.1);
+      color: var(--accent-blue);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .project-links { display: flex; gap: 1rem; }
+    .project-links a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.88rem; font-weight: 500;
+    }
+
+    /* ===== Tech Stack ===== */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tech-item {
+      display: flex; align-items: center; gap: 1rem;
+    }
+
+    .tech-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .tech-icon.blue { background: rgba(122, 162, 247, 0.15); color: var(--accent-blue); }
+    .tech-icon.purple { background: rgba(187, 154, 247, 0.15); color: var(--accent-purple); }
+    .tech-icon.green { background: rgba(158, 206, 106, 0.15); color: var(--accent-green); }
+    .tech-icon.orange { background: rgba(255, 158, 100, 0.15); color: var(--accent-orange); }
+    .tech-icon.cyan { background: rgba(125, 207, 255, 0.15); color: var(--accent-cyan); }
+    .tech-icon.red { background: rgba(247, 118, 142, 0.15); color: var(--accent-red); }
+
+    .tech-name { font-weight: 600; font-size: 0.95rem; }
+    .tech-desc { color: var(--text-muted); font-size: 0.82rem; }
+
+    /* ===== About ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-secondary); margin-bottom: 1rem;
+    }
+
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      text-align: center; padding: 1.5rem;
+    }
+
+    .stat-value {
+      font-size: 2rem; font-weight: 700;
+      color: var(--accent-blue);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat-label {
+      color: var(--text-muted); font-size: 0.85rem;
+      margin-top: 0.25rem;
+    }
+
+    /* ===== Contact ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.25rem;
+    }
+
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(122, 162, 247, 0.15);
+      color: var(--accent-blue);
+      flex-shrink: 0;
+    }
+
+    .contact-label { color: var(--text-muted); font-size: 0.82rem; }
+    .contact-value { font-weight: 500; font-size: 0.95rem; }
+
+    /* ===== Footer ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.active {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--bg-primary);
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .about-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; }
+      .btn { text-align: center; justify-content: center; }
+    }
+
+    /* ===== Scroll indicator ===== */
+    .scroll-indicator {
+      position: absolute; bottom: 2rem;
+      left: 50%; transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <span class="nav-logo">&lt;bailanzhenjun2 /&gt;</span>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+        <i data-lucide="menu" style="width:24px;height:24px"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#tech">Tech Stack</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content" data-aos="fade-up" data-aos-duration="800">
+        <p class="hero-greeting">Hi, my name is</p>
+        <h1 class="hero-name">bailanzhen<span class="highlight">jun2</span></h1>
+        <p class="hero-title">AI Application Developer</p>
+        <p class="hero-desc">
+          Focused on building intelligent knowledge systems with RAG architecture.
+          Combining chemical engineering domain expertise with modern AI technology.
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">
+            <i data-lucide="folder-open" style="width:18px;height:18px"></i>
+            View Projects
+          </a>
+          <a href="https://github.com/bailanzhenjun2" target="_blank" class="btn btn-outline">
+            <i data-lucide="github" style="width:18px;height:18px"></i>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <i data-lucide="chevron-down" style="width:24px;height:24px;color:var(--text-muted)"></i>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-label">// projects</p>
+        <h2 class="section-title">Featured Projects</h2>
+      </div>
+
+      <!-- Project: Chemical RAG -->
+      <div class="glass-card project-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-header">
+          <h3 class="project-name">Chemical RAG Knowledge Base</h3>
+          <span class="project-badge">Core Project</span>
+        </div>
+        <p class="project-desc">
+          An intelligent Q&A system for chemical engineering domain, built with pure Python RAG pipeline.
+          Features domain-specific document chunking, hybrid retrieval, and quantitative evaluation.
+        </p>
+        <ul class="project-highlights">
+          <li>SDS structured chunking: semantic split by 16 safety data sheet sections</li>
+          <li>Three-way retrieval: BM25 keyword + vector search + CAS number exact match</li>
+          <li>BGE-Reranker-v2-m3 for precision reranking of retrieval results</li>
+          <li>PubChem API integration for real-time chemical property enrichment</li>
+          <li>RAGAS evaluation: Faithfulness 0.85, Answer Relevancy 0.82</li>
+          <li>A/B experiment: optimized RAG vs baseline, 30%+ improvement</li>
+        </ul>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">ChromaDB</span>
+          <span class="tech-tag">bge-large-zh</span>
+          <span class="tech-tag">bge-reranker</span>
+          <span class="tech-tag">jieba</span>
+          <span class="tech-tag">DeepSeek API</span>
+          <span class="tech-tag">Streamlit</span>
+          <span class="tech-tag">RAGAS</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/bailanzhenjun2" target="_blank">
+            <i data-lucide="github" style="width:16px;height:16px"></i> Source Code
+          </a>
+          <a href="#" target="_blank">
+            <i data-lucide="play-circle" style="width:16px;height:16px"></i> Demo Video
+          </a>
+        </div>
+      </div>
+
+      <!-- Project: Portfolio (this site) -->
+      <div class="glass-card project-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="project-header">
+          <h3 class="project-name">Portfolio Website</h3>
+          <span class="project-badge" style="background:rgba(122,162,247,0.15);color:var(--accent-blue)">This Site</span>
+        </div>
+        <p class="project-desc">
+          A minimalist developer portfolio with Tokyo Night theme, glassmorphism design,
+          and smooth scroll animations. Built with vanilla HTML/CSS, zero dependencies.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">AOS.js</span>
+          <span class="tech-tag">Lucide Icons</span>
+          <span class="tech-tag">GitHub Pages</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/bailanzhenjun2/bailanzhenjun2.github.io" target="_blank">
+            <i data-lucide="github" style="width:16px;height:16px"></i> Source Code
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack -->
+  <section id="tech">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-label">// tech stack</p>
+        <h2 class="section-title">Technologies I Work With</h2>
+      </div>
+
+      <div class="tech-grid" data-aos="fade-up" data-aos-delay="100">
+        <div class="glass-card tech-item">
+          <div class="tech-icon blue"><i data-lucide="code-2" style="width:24px;height:24px"></i></div>
+          <div><div class="tech-name">Python</div><div class="tech-desc">Primary language for AI development</div></div>
+        </div>
+        <div class="glass-card tech-item">
+          <div class="tech-icon purple"><i data-lucide="brain" style="width:24px;height:24px"></i></div>
+          <div><div class="tech-name">RAG Architecture</div><div class="tech-desc">Retrieval-Augmented Generation systems</div></div>
+        </div>
+        <div class="glass-card tech-item">
+          <div class="tech-icon green"><i data-lucide="database" style="width:24px;height:24px"></i></div>
+          <div><div class="tech-name">ChromaDB</div><div class="tech-desc">Vector database for semantic search</div></div>
+        </div>
+        <div class="glass-card tech-item">
+          <div class="tech-icon orange"><i data-lucide="sparkles" style="width:24px;height:24px"></i></div>
+          <div><div class="tech-name">BGE Models</div><div class="tech-desc">Chinese embedding & reranking</div></div>
+        </div>
+        <div class="glass-card tech-item">
+          <div class="tech-icon cyan"><i data-lucide="message-square" style="width:24px;height:24px"></i></div>
+          <div><div class="tech-name">DeepSeek API</div><div class="tech-desc">LLM for text generation</div></div>
+        </div>
+        <div class="glass-card tech-item">
+          <div class="tech-icon red"><i data-lucide="flask-conical" style="width:24px;height:24px"></i></div>
+          <div><div class="tech-name">Chemical Engineering</div><div class="tech-desc">Domain knowledge & data sources</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-label">// about me</p>
+        <h2 class="section-title">Who I Am</h2>
+      </div>
+
+      <div class="about-grid" data-aos="fade-up" data-aos-delay="100">
+        <div class="about-text">
+          <p>
+            I'm a chemical engineering student passionate about AI application development.
+            I believe the intersection of domain expertise and AI technology creates the most impactful solutions.
+          </p>
+          <p>
+            My focus is on building RAG (Retrieval-Augmented Generation) systems for specialized domains
+            where general-purpose AI falls short. Chemical engineering data has unique challenges
+            that require domain-specific solutions.
+          </p>
+          <p>
+            Currently looking for AI application development internship opportunities
+            at innovative AI companies.
+          </p>
+        </div>
+
+        <div class="about-stats">
+          <div class="glass-card stat-card">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Weeks to Build</div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-value">0.85</div>
+            <div class="stat-label">Faithfulness Score</div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-value">50+</div>
+            <div class="stat-label">Chemical Compounds</div>
+          </div>
+          <div class="glass-card stat-card">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Retrieval Routes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-label">// get in touch</p>
+        <h2 class="section-title">Contact Me</h2>
+      </div>
+
+      <div class="contact-grid" data-aos="fade-up" data-aos-delay="100">
+        <a href="https://github.com/bailanzhenjun2" target="_blank" class="glass-card contact-card">
+          <div class="contact-icon"><i data-lucide="github" style="width:22px;height:22px"></i></div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">bailanzhenjun2</div>
+          </div>
+        </a>
+        <a href="mailto:your-email@example.com" class="glass-card contact-card">
+          <div class="contact-icon"><i data-lucide="mail" style="width:22px;height:22px"></i></div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">your-email@example.com</div>
+          </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Designed & Built by bailanzhenjun2 &middot; 2026</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 600, once: true, offset: 80 });
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
